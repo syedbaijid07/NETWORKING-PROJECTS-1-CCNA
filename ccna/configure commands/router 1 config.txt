@@ -1,0 +1,155 @@
+enable
+configure terminal
+hostname HO-Router
+
+# WAN
+# FOR BRANCH -1
+interface g0/0
+ ip address 10.10.10.1 255.255.255.252
+ no shutdown
+exit
+
+# FOR BRANCH -2
+interface g0/1
+ ip address 10.10.10.5 255.255.255.252
+ no shutdown
+exit
+
+# FOR BRANCH -3
+interface g0/2
+ ip address 10.10.10.9 255.255.255.252
+ no shutdown
+exit
+
+# HO
+interface g1/0
+ ip address 192.168.10.1 255.255.255.224
+ no shutdown
+exit
+
+# OSPF
+router ospf 1
+ network 10.10.10.0 0.0.0.3 area 0
+ network 10.10.10.4 0.0.0.3 area 0
+ network 10.10.10.8 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.31 area 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+enable
+configure terminal
+hostname HO-Router
+
+# ব্রাঞ্চ-১ এর সাথে সিরিয়াল কানেকশন (ধরি S0/0/0)
+interface Serial0/0/0
+ ip address 10.10.10.1 255.255.255.252
+ clock rate 128000   # সিরিয়াল পোর্টের জন্য এটি প্রয়োজন হতে পারে
+ no shutdown
+exit
+
+# ব্রাঞ্চ-২ এর সাথে সিরিয়াল কানেকশন (ধরি S0/0/1)
+interface Serial0/0/1
+ ip address 10.10.10.5 255.255.255.252
+ no shutdown
+exit
+
+# ব্রাঞ্চ-৩ এর সাথে সিরিয়াল কানেকশন (ধরি S0/1/0)
+interface Serial0/1/0
+ ip address 10.10.10.9 255.255.255.252
+ no shutdown
+exit
+
+# HO-র সুইচের সাথে গিগাবিট কানেকশন (ধরি G0/0)
+interface GigabitEthernet0/0
+ ip address 192.168.10.1 255.255.255.224
+ no shutdown
+exit
+
+# OSPF ডাইনামিক রাউটিং (আগের মতোই থাকবে)
+router ospf 1
+ network 10.10.10.0 0.0.0.3 area 0
+ network 10.10.10.4 0.0.0.3 area 0
+ network 10.10.10.8 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.31 area 0
+exit
+
+exit
+
+# Static Route (Backup হিসেবে)
+ip route 0.0.0.0 0.0.0.0 10.10.10.2 150
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+enable
+configure terminal
+hostname HO-Router
+
+# ব্রাঞ্চ-১ এর সাথে সিরিয়াল কানেকশন (ধরি S0/0/0)
+interface Serial0/0/0
+ ip address 10.10.10.1 255.255.255.252
+ clock rate 128000   # সিরিয়াল পোর্টের জন্য এটি প্রয়োজন হতে পারে
+ no shutdown
+exit
+
+# ব্রাঞ্চ-২ এর সাথে সিরিয়াল কানেকশন (ধরি S0/0/1)
+interface Serial0/0/1
+ ip address 10.10.10.5 255.255.255.252
+ no shutdown
+exit
+
+# ব্রাঞ্চ-৩ এর সাথে সিরিয়াল কানেকশন (ধরি S0/1/0)
+interface Serial0/1/0
+ ip address 10.10.10.9 255.255.255.252
+ no shutdown
+exit
+
+# HO-র সুইচের সাথে গিগাবিট কানেকশন (ধরি G0/0)
+interface GigabitEthernet0/0
+ ip address 192.168.10.1 255.255.255.224
+ no shutdown
+exit
+
+# OSPF ডাইনামিক রাউটিং (আগের মতোই থাকবে)
+router ospf 1
+ network 10.10.10.0 0.0.0.3 area 0
+ network 10.10.10.4 0.0.0.3 area 0
+ network 10.10.10.8 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.31 area 0
+exit
+
+ip dhcp pool HO_ADMIN
+ network 192.168.10.0 255.255.255.224
+ default-router 192.168.10.1
+ dns-server 8.8.8.8

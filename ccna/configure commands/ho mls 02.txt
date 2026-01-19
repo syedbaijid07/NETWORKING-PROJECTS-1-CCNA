@@ -1,0 +1,16 @@
+enable
+configure terminal
+hostname HO-MLS-2
+
+interface range g0/1 - 2
+ switchport mode trunk
+ channel-group 1 mode active
+exit
+
+# ২. VTP Client (MLS TO VTP SYNC)
+vtp mode client
+vtp domain ourbank
+vtp password 123
+
+
+wr

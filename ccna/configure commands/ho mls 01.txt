@@ -1,0 +1,36 @@
+enable
+configure terminal
+hostname HO-MLS-1
+
+# EtherChannel Configure
+interface range g0/1 - 2
+ channel-group 1 mode active
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+exit
+
+# VTP Server
+vtp mode server
+vtp domain ourbank
+vtp password 123
+
+# VLAN 
+vlan 10
+ name Admin
+vlan 20
+ name HR
+vlan 30
+ name IT
+exit
+
+# Inter-VLAN Routing Getway
+ip routing
+interface vlan 10
+        ip address 192.168.10.2 255.255.255.224
+interface vlan 20
+        ip address 192.168.10.33 255.255.255.224
+interface vlan 30
+        ip address 192.168.10.65 255.255.255.224
+exit
+
+wr

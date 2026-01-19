@@ -1,0 +1,31 @@
+enable
+configure terminal
+hostname Branch-3
+
+# WAN
+interface Serial0/0/0
+ ip address 10.10.10.10 255.255.255.252
+ no shutdown
+exit
+
+# LAN
+interface GigabitEthernet0/0
+ ip address 192.168.40.1 255.255.255.224
+ no shutdown
+exit
+
+# DHCP
+ip dhcp pool BR3_POOL
+ network 192.168.40.0 255.255.255.224
+ default-router 192.168.40.1
+ dns-server 8.8.8.8
+exit
+
+# ৪. OSPF
+router ospf 1
+ network 10.10.10.8 0.0.0.3 area 0
+ network 192.168.40.0 0.0.0.31 area 0
+exit
+
+
+wr

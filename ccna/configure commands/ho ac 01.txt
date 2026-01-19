@@ -1,0 +1,35 @@
+enable
+configure terminal
+hostname HO-AS-1
+
+# VTP Configure
+vtp mode client
+vtp domain ourbank
+vtp password 123
+
+# trunk setup
+interface f0/1
+ switchport mode trunk
+exit
+
+# VLAN SETUP
+# Admin PC
+interface f0/10
+ switchport mode access
+ switchport access vlan 10
+exit
+
+# HR PC 
+interface f0/20
+ switchport mode access
+ switchport access vlan 20
+exit
+
+# IT PC
+interface f0/24
+ switchport mode access
+ switchport access vlan 30
+exit
+
+
+wr
