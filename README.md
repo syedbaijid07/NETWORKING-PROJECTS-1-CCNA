@@ -29,21 +29,15 @@ The goal of this project is to simulate a real-world banking network environment
 * **Branch 2:** 192.168.30.0/27 (15 Users)
 * **Branch 3:** 192.168.40.0/27 (20 Users)
 
-## 📁 Files in this Repository
+## Files in this Repository
 * `project for cisco.pkt`: The original Cisco Packet Tracer simulation file.
 * `Project Documentation.pdf`: Detailed technical documentation including IP planning and backup strategies.
 * `Capture.PNG`: Network topology diagram screenshot.
 
-## ⚙️ Technologies Used
+## Technologies Used
 * Cisco Packet Tracer
 * OSPF (Open Shortest Path First)
 * HSRP (Hot Standby Router Protocol)
 * VLAN & Inter-VLAN Routing
 * EtherChannel
 * Port Security (Sticky MAC)
-
-## 📝 How to Run
-1. Download and install **Cisco Packet Tracer**.
-2. Clone this repository:
-   ```bash
-   git clone https://github.com/syedbaijid07/NETWORKING-PROJECTS-1-CCNA ``
